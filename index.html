@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENESIS HORIZON | The Era of Proof</title>
+   <style>
+           /* --- CORE AESTHETICS --- */
+           :root {
+               --void-black: #050505;
+               --text-gold: #D4AF37;
+               --text-dim: #888888;
+               --accent-glow: rgba(212, 175, 55, 0.15);
+           }
+
+           body {
+               background-color: var(--void-black);
+               color: white;
+               font-family: 'Courier New', Courier, monospace;
+               margin: 0;
+               height: 100vh;
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+               align-items: center;
+               overflow: hidden;
+           }
+
+           /* --- TYPOGRAPHY --- */
+           h1 {
+               font-family: 'Times New Roman', serif;
+               font-size: 4rem;
+               letter-spacing: -2px;
+               margin: 0;
+               color: white;
+               text-transform: uppercase;
+               font-weight: 100;
+               text-align: center;
+               z-index: 10;
+           }
+
+           h2 {
+               color: var(--text-gold);
+               font-size: 1rem;
+               letter-spacing: 4px;
+               text-transform: uppercase;
+               margin-top: 1rem;
+               margin-bottom: 3rem;
+               font-weight: 400;
+               text-align: center;
+               z-index: 10;
+           }
+
+           p.manifesto {
+               max-width: 600px;
+               text-align: center;
+               color: var(--text-dim);
+               line-height: 1.6;
+               font-size: 0.9rem;
+               margin-bottom: 3rem;
+               z-index: 10;
+           }
+
+           /* --- INTERACTIVE ELEMENTS --- */
+           .btn-container {
+               display: flex;
+               gap: 20px;
+               z-index: 10;
+           }
+
+           .btn {
+               border: 1px solid var(--text-gold);
+               color: var(--text-gold);
+               padding: 15px 30px;
+               text-decoration: none;
+               font-size: 0.8rem;
+               letter-spacing: 2px;
+               transition: all 0.3s ease;
+               background: transparent;
+               cursor: pointer;
+               text-transform: uppercase;
+           }
+
+           .btn:hover {
+               background: var(--text-gold);
+               color: var(--void-black);
+               box-shadow: 0 0 20px var(--accent-glow);
+           }
+
+           /* --- MATHEMATICAL BACKGROUND (BALANCED 2D ROTATION) --- */
+           .orbit {
+               position: absolute;
+               border-radius: 50%;
+               pointer-events: none;
+               border: 1px solid rgba(212, 175, 55, 0.25);
+           }
+
+           /* Тонкий блик */
+           .orbit::before {
+               content: '';
+               position: absolute;
+               top: -15px;
+               left: 50%;
+               margin-left: -15px;
+               width: 30px;
+               height: 30px;
+               background: radial-gradient(
+                   circle at center,
+                   rgba(212, 175, 55, 0.35) 0%,
+                   rgba(212, 175, 55, 0.2) 30%,
+                   rgba(212, 175, 55, 0.08) 60%,
+                   transparent 100%
+               );
+               filter: blur(4px);
+           }
+
+           .orbit:nth-child(1) { 
+               width: 40vw; 
+               height: 20vw;
+               animation: rotate 80s linear infinite, shimmer1 3.5s ease-in-out infinite;
+           }
+           
+           .orbit:nth-child(1)::before {
+               animation: blinkRotate 4s linear infinite, blinkFade 4s ease-in-out infinite;
+           }
+
+           .orbit:nth-child(2) { 
+               width: 60vw; 
+               height: 30vw;
+               animation: rotate 100s linear infinite reverse, shimmer2 4.5s ease-in-out infinite;
+               border-color: rgba(212, 175, 55, 0.28);
+           }
+           
+           .orbit:nth-child(2)::before {
+               animation: blinkRotate 5s linear infinite, blinkFade 5s ease-in-out infinite 1.5s;
+           }
+
+           .orbit:nth-child(3) { 
+               width: 80vw; 
+               height: 40vw;
+               animation: rotate 130s linear infinite, shimmer3 5.5s ease-in-out infinite;
+               border-color: rgba(212, 175, 55, 0.3);
+           }
+           
+           .orbit:nth-child(3)::before {
+               animation: blinkRotate 6s linear infinite reverse, blinkFade 6s ease-in-out infinite 3s;
+           }
+
+           @keyframes rotate {
+               0% { transform: rotate(0deg); }
+               100% { transform: rotate(360deg); }
+           }
+
+           @keyframes blinkRotate {
+               0% { transform: rotate(0deg) translateY(0); }
+               100% { transform: rotate(360deg) translateY(0); }
+           }
+
+           @keyframes blinkFade {
+               0%, 85%, 100% { opacity: 0; }
+               10%, 30% { opacity: 1; }
+           }
+
+           @keyframes shimmer1 {
+               0%, 100% { opacity: 0.3; }
+               50% { opacity: 0.6; }
+           }
+
+           @keyframes shimmer2 {
+               0%, 100% { opacity: 0.35; }
+               50% { opacity: 0.65; }
+           }
+
+           @keyframes shimmer3 {
+               0%, 100% { opacity: 0.4; }
+               50% { opacity: 0.7; }
+           }
+
+           /* --- FOOTER --- */
+           .footer {
+               position: absolute;
+               bottom: 20px;
+               font-size: 0.7rem;
+               color: #888;
+               letter-spacing: 1px;
+           }
+       </style>
+</head>
+<body>
+
+    <!-- Background Math Elements -->
+    <div class="orbit"></div>
+    <div class="orbit"></div>
+    <div class="orbit"></div>
+
+    <!-- Main Content -->
+    <h1>PROBABILITY IS OVER.</h1>
+    <h2>GENESIS HORIZON</h2>
+
+    <p class="manifesto">
+        The silicon limit has been reached. Biological prediction has stalled.<br>
+        We are introducing the <strong>Causal-Quantum-Spectral (CQS)</strong> method.<br>
+        We do not predict the future. We calculate it.
+    </p>
+
+    <div class="btn-container">
+        <a href="abstract.html" class="btn">READ ABSTRACT</a>
+        <a href="#" class="btn">THE MANIFESTO</a>
+    </div>
+
+    <div class="footer">
+        [ SYSTEM STATUS: AEGIS PRIME ACTIVE ]
+    </div>
+
+</body>
+</html>
