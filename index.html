@@ -212,5 +212,12 @@
         [ SYSTEM STATUS: AEGIS PRIME ACTIVE ]
     </div>
 
+    <script>
+        document.querySelectorAll('.orbit').forEach(orbit => {
+            const randomDelay = -Math.random() * 100;
+            orbit.style.animationDelay = `${randomDelay}s, 0s`;
+        });
+    </script>
+
 </body>
 </html>
