@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GENESIS HORIZON | The Era of Proof</title>
+    <title>GENESIS HORIZON | Вариант 1</title>
    <style>
-           /* --- CORE AESTHETICS --- */
            :root {
                --void-black: #050505;
                --text-gold: #D4AF37;
@@ -26,7 +25,52 @@
                overflow: hidden;
            }
 
-           /* --- TYPOGRAPHY --- */
+           /* НОВОЕ: Строка статуса */
+           .status-bar {
+               position: absolute;
+               top: 0;
+               left: 0;
+               right: 0;
+               padding: 12px 30px;
+               background: linear-gradient(180deg, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0) 100%);
+               font-size: 0.7rem;
+               letter-spacing: 2px;
+               color: var(--text-gold);
+               display: flex;
+               justify-content: space-between;
+               z-index: 100;
+               border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+           }
+
+           .status-bar .left,
+           .status-bar .right {
+               display: flex;
+               gap: 30px;
+           }
+
+           .status-item {
+               opacity: 0.7;
+               transition: opacity 0.3s;
+           }
+
+           .status-item:hover {
+               opacity: 1;
+           }
+
+           .status-value {
+               color: white;
+               margin-left: 8px;
+           }
+
+           .cursor-blink {
+               animation: blink-cursor 1.2s infinite;
+           }
+
+           @keyframes blink-cursor {
+               0%, 49% { opacity: 1; }
+               50%, 100% { opacity: 0; }
+           }
+
            h1 {
                font-family: 'Times New Roman', serif;
                font-size: 4rem;
@@ -61,7 +105,6 @@
                z-index: 10;
            }
 
-           /* --- INTERACTIVE ELEMENTS --- */
            .btn-container {
                display: flex;
                gap: 20px;
@@ -87,7 +130,6 @@
                box-shadow: 0 0 20px var(--accent-glow);
            }
 
-           /* --- MATHEMATICAL BACKGROUND --- */
            .orbit-container {
                position: absolute;
                top: 50%;
@@ -108,7 +150,6 @@
                border: 1px solid rgba(212, 175, 55, 0.125);
            }
 
-           /* Светящийся отрезок вместо точки */
            .firefly {
                position: absolute;
                top: 50%;
@@ -130,6 +171,7 @@
                    0 0 8px rgba(212, 175, 55, 0.3),
                    0 0 15px rgba(212, 175, 55, 0.15),
                    0 0 25px rgba(212, 175, 55, 0.08);
+               transform-origin: center center;
            }
 
            .orbit:nth-child(1) { 
@@ -140,11 +182,11 @@
 
            .orbit:nth-child(1) .firefly {
                offset-path: ellipse(20vw 10vw at 50% 50%);
-               animation: move-orbit 120s linear infinite, blink1 18s ease-in-out infinite;
+               animation: move-orbit 120s linear infinite, blink1 18s ease-in-out infinite, firefly-scale1 120s ease-in-out infinite;
            }
 
            .orbit:nth-child(1) .firefly.pair {
-               animation-delay: -60s, 0s;
+               animation-delay: -60s, 0s, -60s;
            }
 
            .orbit:nth-child(2) { 
@@ -156,11 +198,11 @@
 
            .orbit:nth-child(2) .firefly {
                offset-path: ellipse(30vw 15vw at 50% 50%);
-               animation: move-orbit-reverse 150s linear infinite, blink2 18s ease-in-out infinite;
+               animation: move-orbit-reverse 150s linear infinite, blink2 18s ease-in-out infinite, firefly-scale2 150s ease-in-out infinite;
            }
 
            .orbit:nth-child(2) .firefly.pair {
-               animation-delay: -75s, 0s;
+               animation-delay: -75s, 0s, -75s;
            }
 
            .orbit:nth-child(3) { 
@@ -172,11 +214,11 @@
 
            .orbit:nth-child(3) .firefly {
                offset-path: ellipse(40vw 20vw at 50% 50%);
-               animation: move-orbit 180s linear infinite, blink3 18s ease-in-out infinite;
+               animation: move-orbit 180s linear infinite, blink3 18s ease-in-out infinite, firefly-scale3 180s ease-in-out infinite;
            }
 
            .orbit:nth-child(3) .firefly.pair {
-               animation-delay: -90s, 0s;
+               animation-delay: -90s, 0s, -90s;
            }
 
            @keyframes rotate {
@@ -195,38 +237,89 @@
            }
 
            @keyframes blink1 {
-               0%, 40% { opacity: 1; }
-               45%, 100% { opacity: 0; }
+               0%, 27% { opacity: 1; }
+               34%, 93% { opacity: 0; }
+               100% { opacity: 1; }
            }
 
            @keyframes blink2 {
-               0%, 30% { opacity: 0; }
-               35%, 75% { opacity: 1; }
-               80%, 100% { opacity: 0; }
+               0%, 20% { opacity: 0; }
+               27%, 60% { opacity: 1; }
+               67%, 100% { opacity: 0; }
            }
 
            @keyframes blink3 {
-               0%, 70% { opacity: 0; }
-               75%, 100% { opacity: 1; }
+               0%, 53% { opacity: 0; }
+               60%, 93% { opacity: 1; }
+               100% { opacity: 0; }
            }
 
            @keyframes orbit-blink1 {
-               0%, 40% { opacity: 1; }
-               45%, 100% { opacity: 0; }
+               0%, 27% { opacity: 1; }
+               34%, 93% { opacity: 0; }
+               100% { opacity: 1; }
            }
 
            @keyframes orbit-blink2 {
-               0%, 30% { opacity: 0; }
-               35%, 75% { opacity: 1; }
-               80%, 100% { opacity: 0; }
+               0%, 20% { opacity: 0; }
+               27%, 60% { opacity: 1; }
+               67%, 100% { opacity: 0; }
            }
 
            @keyframes orbit-blink3 {
-               0%, 70% { opacity: 0; }
-               75%, 100% { opacity: 1; }
+               0%, 53% { opacity: 0; }
+               60%, 93% { opacity: 1; }
+               100% { opacity: 0; }
            }
 
-           /* --- FOOTER --- */
+           @keyframes firefly-scale1 {
+               0% { transform: scaleX(0.5); }
+               2% { transform: scaleX(0.8); }
+               10% { transform: scaleX(1.5); }
+               25% { transform: scaleX(2.0); }
+               40% { transform: scaleX(1.5); }
+               48% { transform: scaleX(0.8); }
+               50% { transform: scaleX(0.5); }
+               52% { transform: scaleX(0.8); }
+               60% { transform: scaleX(1.5); }
+               75% { transform: scaleX(2.0); }
+               90% { transform: scaleX(1.5); }
+               98% { transform: scaleX(0.8); }
+               100% { transform: scaleX(0.5); }
+           }
+
+           @keyframes firefly-scale2 {
+               0% { transform: scaleX(0.45); }
+               2% { transform: scaleX(0.75); }
+               10% { transform: scaleX(1.6); }
+               25% { transform: scaleX(2.2); }
+               40% { transform: scaleX(1.6); }
+               48% { transform: scaleX(0.75); }
+               50% { transform: scaleX(0.45); }
+               52% { transform: scaleX(0.75); }
+               60% { transform: scaleX(1.6); }
+               75% { transform: scaleX(2.2); }
+               90% { transform: scaleX(1.6); }
+               98% { transform: scaleX(0.75); }
+               100% { transform: scaleX(0.45); }
+           }
+
+           @keyframes firefly-scale3 {
+               0% { transform: scaleX(0.4); }
+               2% { transform: scaleX(0.7); }
+               10% { transform: scaleX(1.7); }
+               25% { transform: scaleX(2.4); }
+               40% { transform: scaleX(1.7); }
+               48% { transform: scaleX(0.7); }
+               50% { transform: scaleX(0.4); }
+               52% { transform: scaleX(0.7); }
+               60% { transform: scaleX(1.7); }
+               75% { transform: scaleX(2.4); }
+               90% { transform: scaleX(1.7); }
+               98% { transform: scaleX(0.7); }
+               100% { transform: scaleX(0.4); }
+           }
+
            .footer {
                position: absolute;
                bottom: 20px;
@@ -238,7 +331,93 @@
 </head>
 <body>
 
-    <!-- Background Math Elements -->
+    <!-- НОВОЕ: Строка статуса -->
+    <div class="status-bar">
+        <div class="left">
+            <div class="status-item">SYSTEM:<span class="status-value">AEGIS PRIME</span></div>
+            <div class="status-item">STATUS:<span class="status-value">ACTIVE</span></div>
+        </div>
+        <div class="right">
+            <div class="status-item">LATENCY:<span class="status-value" id="latency">0.003ms</span></div>
+            <div class="status-item">NODES:<span class="status-value" id="nodes">847</span></div>
+            <div class="status-item"><span class="cursor-blink">_</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Живые метрики
+        setInterval(() => {
+            document.getElementById('latency').textContent = (Math.random() * 0.01).toFixed(3) + 'ms';
+            document.getElementById('nodes').textContent = Math.floor(840 + Math.random() * 15);
+        }, 2000);
+
+        // Случайные орбиты
+        document.addEventListener('DOMContentLoaded', () => {
+            const orbits = document.querySelectorAll('.orbit');
+            const cycleDuration = 18;
+            
+            const visibilityRanges = [
+                [{start: 0, end: 34}, {start: 93, end: 100}],
+                [{start: 20, end: 67}],
+                [{start: 53, end: 100}]
+            ];
+            
+            function isVisibleAt(orbitIndex, timePercent, offset) {
+                const adjustedTime = (timePercent + offset) % 100;
+                return visibilityRanges[orbitIndex].some(range => 
+                    adjustedTime >= range.start && adjustedTime <= range.end
+                );
+            }
+            
+            function validateCoverage(offsets) {
+                const step = 1;
+                for (let t = 0; t < 100; t += step) {
+                    let visibleCount = 0;
+                    for (let i = 0; i < 3; i++) {
+                        if (isVisibleAt(i, t, offsets[i])) visibleCount++;
+                    }
+                    if (visibleCount === 0 || visibleCount > 2) return false;
+                }
+                return true;
+            }
+            
+            let attempts = 0;
+            let validDelays = null;
+            
+            while (attempts < 1000 && !validDelays) {
+                const offsets = [
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100
+                ];
+                
+                if (validateCoverage(offsets)) {
+                    validDelays = offsets.map(o => -(o / 100) * cycleDuration);
+                    break;
+                }
+                
+                attempts++;
+            }
+            
+            if (!validDelays) {
+                validDelays = [0, -6, -12];
+            }
+            
+            orbits.forEach((orbit, index) => {
+                const delay = validDelays[index];
+                orbit.style.animationDelay = `${delay}s, ${delay}s`;
+                
+                const fireflies = orbit.querySelectorAll('.firefly');
+                fireflies.forEach(firefly => {
+                    const fireflyDelay = firefly.classList.contains('pair') 
+                        ? delay - (index === 0 ? 60 : index === 1 ? 75 : 90)
+                        : delay;
+                    firefly.style.animationDelay = `${fireflyDelay}s, ${delay}s, ${fireflyDelay}s`;
+                });
+            });
+        });
+    </script>
+
     <div class="orbit-container">
         <div class="orbit">
             <div class="firefly"></div>
@@ -254,7 +433,6 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <h1>PROBABILITY IS OVER.</h1>
     <h2>GENESIS HORIZON</h2>
 
