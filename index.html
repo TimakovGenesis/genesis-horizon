@@ -87,93 +87,143 @@
                box-shadow: 0 0 20px var(--accent-glow);
            }
 
-           /* --- MATHEMATICAL BACKGROUND (BALANCED 2D ROTATION) --- */
-           .orbit {
+           /* --- MATHEMATICAL BACKGROUND --- */
+           .orbit-container {
                position: absolute;
-               border-radius: 50%;
+               top: 50%;
+               left: 50%;
+               transform: translate(-50%, -50%);
+               width: 0;
+               height: 0;
                pointer-events: none;
-               border: 1px solid rgba(212, 175, 55, 0.25);
            }
 
-           /* Тонкий блик */
-           .orbit::before {
-               content: '';
+           .orbit {
                position: absolute;
-               top: -15px;
+               top: 50%;
                left: 50%;
-               margin-left: -15px;
-               width: 30px;
-               height: 30px;
-               background: radial-gradient(
-                   circle at center,
-                   rgba(212, 175, 55, 0.35) 0%,
-                   rgba(212, 175, 55, 0.2) 30%,
-                   rgba(212, 175, 55, 0.08) 60%,
+               transform: translate(-50%, -50%);
+               border-radius: 50%;
+               pointer-events: none;
+               border: 1px solid rgba(212, 175, 55, 0.125);
+           }
+
+           /* Светящийся отрезок вместо точки */
+           .firefly {
+               position: absolute;
+               top: 50%;
+               left: 50%;
+               width: 70px;
+               height: 2px;
+               margin: -1px 0 0 -35px;
+               background: linear-gradient(
+                   to right,
+                   transparent 0%,
+                   rgba(212, 175, 55, 0.12) 20%,
+                   rgba(212, 175, 55, 0.4) 50%,
+                   rgba(212, 175, 55, 0.12) 80%,
                    transparent 100%
                );
-               filter: blur(4px);
+               filter: blur(0.5px);
+               border-radius: 1px;
+               box-shadow: 
+                   0 0 8px rgba(212, 175, 55, 0.3),
+                   0 0 15px rgba(212, 175, 55, 0.15),
+                   0 0 25px rgba(212, 175, 55, 0.08);
            }
 
            .orbit:nth-child(1) { 
                width: 40vw; 
                height: 20vw;
-               animation: rotate 80s linear infinite, shimmer1 3.5s ease-in-out infinite;
+               animation: rotate 120s linear infinite, orbit-blink1 18s ease-in-out infinite;
            }
-           
-           .orbit:nth-child(1)::before {
-               animation: blinkRotate 4s linear infinite, blinkFade 4s ease-in-out infinite;
+
+           .orbit:nth-child(1) .firefly {
+               offset-path: ellipse(20vw 10vw at 50% 50%);
+               animation: move-orbit 120s linear infinite, blink1 18s ease-in-out infinite;
+           }
+
+           .orbit:nth-child(1) .firefly.pair {
+               animation-delay: -60s, 0s;
            }
 
            .orbit:nth-child(2) { 
                width: 60vw; 
                height: 30vw;
-               animation: rotate 100s linear infinite reverse, shimmer2 4.5s ease-in-out infinite;
-               border-color: rgba(212, 175, 55, 0.28);
+               animation: rotate 150s linear infinite reverse, orbit-blink2 18s ease-in-out infinite;
+               border-color: rgba(212, 175, 55, 0.14);
            }
-           
-           .orbit:nth-child(2)::before {
-               animation: blinkRotate 5s linear infinite, blinkFade 5s ease-in-out infinite 1.5s;
+
+           .orbit:nth-child(2) .firefly {
+               offset-path: ellipse(30vw 15vw at 50% 50%);
+               animation: move-orbit-reverse 150s linear infinite, blink2 18s ease-in-out infinite;
+           }
+
+           .orbit:nth-child(2) .firefly.pair {
+               animation-delay: -75s, 0s;
            }
 
            .orbit:nth-child(3) { 
                width: 80vw; 
                height: 40vw;
-               animation: rotate 130s linear infinite, shimmer3 5.5s ease-in-out infinite;
-               border-color: rgba(212, 175, 55, 0.3);
+               animation: rotate 180s linear infinite, orbit-blink3 18s ease-in-out infinite;
+               border-color: rgba(212, 175, 55, 0.15);
            }
-           
-           .orbit:nth-child(3)::before {
-               animation: blinkRotate 6s linear infinite reverse, blinkFade 6s ease-in-out infinite 3s;
+
+           .orbit:nth-child(3) .firefly {
+               offset-path: ellipse(40vw 20vw at 50% 50%);
+               animation: move-orbit 180s linear infinite, blink3 18s ease-in-out infinite;
+           }
+
+           .orbit:nth-child(3) .firefly.pair {
+               animation-delay: -90s, 0s;
            }
 
            @keyframes rotate {
-               0% { transform: rotate(0deg); }
-               100% { transform: rotate(360deg); }
+               0% { transform: translate(-50%, -50%) rotate(0deg); }
+               100% { transform: translate(-50%, -50%) rotate(360deg); }
            }
 
-           @keyframes blinkRotate {
-               0% { transform: rotate(0deg) translateY(0); }
-               100% { transform: rotate(360deg) translateY(0); }
+           @keyframes move-orbit {
+               0% { offset-distance: 0%; }
+               100% { offset-distance: 100%; }
            }
 
-           @keyframes blinkFade {
-               0%, 85%, 100% { opacity: 0; }
-               10%, 30% { opacity: 1; }
+           @keyframes move-orbit-reverse {
+               0% { offset-distance: 100%; }
+               100% { offset-distance: 0%; }
            }
 
-           @keyframes shimmer1 {
-               0%, 100% { opacity: 0.3; }
-               50% { opacity: 0.6; }
+           @keyframes blink1 {
+               0%, 40% { opacity: 1; }
+               45%, 100% { opacity: 0; }
            }
 
-           @keyframes shimmer2 {
-               0%, 100% { opacity: 0.35; }
-               50% { opacity: 0.65; }
+           @keyframes blink2 {
+               0%, 30% { opacity: 0; }
+               35%, 75% { opacity: 1; }
+               80%, 100% { opacity: 0; }
            }
 
-           @keyframes shimmer3 {
-               0%, 100% { opacity: 0.4; }
-               50% { opacity: 0.7; }
+           @keyframes blink3 {
+               0%, 70% { opacity: 0; }
+               75%, 100% { opacity: 1; }
+           }
+
+           @keyframes orbit-blink1 {
+               0%, 40% { opacity: 1; }
+               45%, 100% { opacity: 0; }
+           }
+
+           @keyframes orbit-blink2 {
+               0%, 30% { opacity: 0; }
+               35%, 75% { opacity: 1; }
+               80%, 100% { opacity: 0; }
+           }
+
+           @keyframes orbit-blink3 {
+               0%, 70% { opacity: 0; }
+               75%, 100% { opacity: 1; }
            }
 
            /* --- FOOTER --- */
@@ -189,9 +239,20 @@
 <body>
 
     <!-- Background Math Elements -->
-    <div class="orbit"></div>
-    <div class="orbit"></div>
-    <div class="orbit"></div>
+    <div class="orbit-container">
+        <div class="orbit">
+            <div class="firefly"></div>
+            <div class="firefly pair"></div>
+        </div>
+        <div class="orbit">
+            <div class="firefly"></div>
+            <div class="firefly pair"></div>
+        </div>
+        <div class="orbit">
+            <div class="firefly"></div>
+            <div class="firefly pair"></div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <h1>PROBABILITY IS OVER.</h1>
@@ -211,13 +272,6 @@
     <div class="footer">
         [ SYSTEM STATUS: AEGIS PRIME ACTIVE ]
     </div>
-
-    <script>
-        document.querySelectorAll('.orbit').forEach(orbit => {
-            const randomDelay = -Math.random() * 100;
-            orbit.style.animationDelay = `${randomDelay}s, 0s`;
-        });
-    </script>
 
 </body>
 </html>
