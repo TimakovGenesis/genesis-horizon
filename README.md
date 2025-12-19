@@ -1,2 +1,2 @@
-# genesis-AETHER
-Official website for Genesis Horizon project.
+# GENESIS-AETHER
+Official website for Genesis AETHER project.
